@@ -1,0 +1,17 @@
+
+FROM amazonlinux:2
+
+# Install Apache (httpd)
+RUN yum -y update && \
+    yum -y install httpd && \
+    yum clean all
+
+# Copy your HTML files into Apache's root directory
+COPY ./public-html/ /var/www/html/
+
+# Start Apache when the container launches
+CMD ["/usr/sbin/httpd", "-D", "FOREGROUND"]
+
+# Expose port 80
+EXPOSE 80
+
